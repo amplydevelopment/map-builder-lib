@@ -23,12 +23,10 @@ Build output is `dist/index.js` (ESM-only).
 ## CDN (unpkg)
 
 ```html
-<script type="module">
-  import { createMapBuilder } from "https://unpkg.com/@amplydevteam/mapbuilder/dist/index.js";
-
-  const mapBuilder = createMapBuilder({ title: "CDN Demo" });
-  mapBuilder.mount("#app");
-</script>
+<script
+  type="module"
+  src="https://unpkg.com/@amplydevteam/mapbuilder/dist/index.js"
+></script>
 ```
 
 ## Release and changelog
