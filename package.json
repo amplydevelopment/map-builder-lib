@@ -1,6 +1,6 @@
 {
   "name": "@amplydevteam/mapbuilder",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Mapbuilder library",
   "type": "module",
   "main": "./dist/index.js",
