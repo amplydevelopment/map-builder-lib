@@ -5,7 +5,7 @@ import {
   parseInteger,
   parseNumber,
 } from "./dom.js";
-import { renderLegend } from "./legend.js";
+import { getLegendData, renderLegend } from "./legend.js";
 import { addMarkers, getMarkerData } from "./markers.js";
 import { applyCustomCss, createMap, waitForGoogleMaps } from "./maps.js";
 import {
@@ -21,6 +21,23 @@ import {
       return;
     }
 
+    // CRITICAL: Extract ALL DOM data BEFORE creating the map
+    // because new google.maps.Map() clears the element's innerHTML
+    const tooltipConfig = getTooltipConfig(
+      mapElement,
+      getDataAttr,
+      parseBool,
+    );
+
+    const markerData = getMarkerData(
+      mapElement,
+      parseBool,
+      parseNumber,
+    );
+
+    const legendData = getLegendData(mapElement, getDataAttr, parseBool);
+
+    // Now create the map (this will clear mapElement's children)
     const map = createMap(mapElement, {
       getDataAttr,
       parseBool,
@@ -28,22 +45,12 @@ import {
       parseInteger,
     });
 
-    const tooltipConfig = getTooltipConfig(
-      mapElement,
-      getDataAttr,
-      parseBool,
-    );
     injectTooltipContainerStyles(tooltipConfig.styles);
 
-    const markerData = getMarkerData(
-      mapElement,
-      parseBool,
-      parseNumber,
-    );
     const infoWindow = new google.maps.InfoWindow();
     addMarkers({ map, markerData, tooltipConfig, infoWindow });
 
-    renderLegend(mapElement, map, getDataAttr, parseBool);
+    renderLegend(map, legendData);
     applyCustomCss(mapElement, getDataAttr);
   }
 

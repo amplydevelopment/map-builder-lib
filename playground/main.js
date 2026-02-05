@@ -1,7 +1,3 @@
-import { createMapBuilder } from "mapbuilder";
-
-const mapBuilder = createMapBuilder({
-  title: "Mapbuilder Dev Mode",
-});
-
-mapBuilder.mount("#app");
+// Import the mapbuilder library
+// It will auto-initialize when it finds [amply-map] in the DOM
+import "mapbuilder";

@@ -60,7 +60,6 @@ export function addMarkers({
     ) {
       return;
     }
-
     const marker = new google.maps.Marker({
       position: {
         lat: markerDataItem.lat,
